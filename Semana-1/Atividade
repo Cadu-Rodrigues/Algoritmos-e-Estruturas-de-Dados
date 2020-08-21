@@ -1,0 +1,17 @@
+Exercício 1
+#include <stdio.h>
+int main(){
+    printf("Estou testando o printf()");
+    return 0;
+}
+Exercicio 2
+Imprimindo inteiro: 11295758
+Imprimindo numero: 11295758
+Imprimindo float (com cast): 11295758.000000
+Imprimindo quociente: 5647879
+Imprimindo resto: 0
+
+Exercicio 3
+x: 5 y: 10 z: 0x7ffcc1d501f8
+&x: 0x7ffcc1d501f8 &y: 0x7ffcc1d501fc &z: 0x7ffcc1d50200
+
