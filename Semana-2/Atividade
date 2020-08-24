@@ -1,0 +1,21 @@
+Exercicio 1
+typedef struct aux{
+    int id;
+    struct aux* mae;
+    struct aux* pai;
+}PESSOA;
+
+Exercicio 2
+PESSOA* inicializar(int id){
+    PESSOA* p = (PESSOA*) malloc(sizeof(PESSOA));
+    p->id = id;
+    p->mae = NULL;
+    p->pai = NULL;
+    return p;
+}
+
+Exercicio 3
+void registrar(PESSOA* filho,PESSOA* mae,PESSOA* pai){
+    filho->mae = mae;
+    filho->pai = pai;
+}
