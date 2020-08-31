@@ -1,0 +1,18 @@
+Exercicio 1
+void ordenar(LISTA *l)
+{
+    int i, j;
+    REGISTRO temp;
+    for (i = 0; i < l->nroElem - 1; i++)
+    {
+        for (j = i; j < l->nroElem; j++)
+        {
+            if (l->registros[i].chave > l->registros[j].chave)
+            {
+                temp = l->registros[i];
+                l->registros[i] = l->registros[j];
+                l->registros[j] = temp;
+            }
+        }
+    }
+}
