@@ -1,14 +1,20 @@
-## ACH2023 - Algoritmos e Estruturas de Dados ##
-### 2 Semestre 2020 ###
-#### Professor Luciano Antonio Digiampietri ####
-##### EP'S #####
+## ACH2023 - Algoritmos e Estruturas de Dados
+
+### 2 Semestre 2020
+
+#### Professor Luciano Antonio Digiampietri
+
+##### EP'S
+
 - [ ] EP1 entrega até 04/10
 - [ ] EP2 entrega até 08/11
 - [ ] EP3 entrega até 06/12
-##### Semanas #####
+
+##### Semanas
+
 - [x] Semana 1 - 17/08 a 22/08
 - [x] Semana 2 - 24/08 a 29/08
-- [ ] Semana 3 - 31/08 a 05/09
+- [x] Semana 3 - 31/08 a 05/09
 - [ ] Semana 4 - 07/09 a 12/09
 - [ ] Semana 5 - 14/09 a 19/09
 - [ ] Semana 6 - 21/09 a 26/09
@@ -26,6 +32,8 @@
 
 [Site Disciplina](http://www.each.usp.br/digiampietri/ACH2023/)
 
-<b>Plantão de dúvidas semanal:</b> segundas e quintas-feiras (exceto nos feriados) das 19:30h às 20:30h via [Google Meet](meet.google.com/qhz-aobi-cpj)
+<b>Plantão de dúvidas semanal:</b> segundas e quintas-feiras (exceto nos feriados) das 19:30h às
+20:30h via [Google Meet](meet.google.com/qhz-aobi-cpj)
 
-<b>[Playlist com as videoaulas selecionadas para a disciplina](https://www.youtube.com/playlist?list=PL_JAaU8k6DQXxJ_HL_kiy8_jXzGs6e6EH)<b> (exceto a primeira, com os critérios de avaliação).
+<b>[Playlist com as videoaulas selecionadas para a disciplina](https://www.youtube.com/playlist?list=PL_JAaU8k6DQXxJ_HL_kiy8_jXzGs6e6EH)<b>
+(exceto a primeira, com os critérios de avaliação).
