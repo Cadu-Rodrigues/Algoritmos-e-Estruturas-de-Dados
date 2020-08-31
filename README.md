@@ -33,7 +33,7 @@
 [Site Disciplina](http://www.each.usp.br/digiampietri/ACH2023/)
 
 <b>Plantão de dúvidas semanal:</b> segundas e quintas-feiras (exceto nos feriados) das 19:30h às
-20:30h via [Google Meet](meet.google.com/qhz-aobi-cpj)
+20:30h via [Google Meet](https://meet.google.com/qhz-aobi-cpj)
 
 <b>[Playlist com as videoaulas selecionadas para a disciplina](https://www.youtube.com/playlist?list=PL_JAaU8k6DQXxJ_HL_kiy8_jXzGs6e6EH)<b>
 (exceto a primeira, com os critérios de avaliação).
