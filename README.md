@@ -6,7 +6,7 @@
 
 ##### EP'S
 
-- [ ] EP1 entrega até 04/10
+- [ ] EP1 entrega até 11/10
 - [ ] EP2 entrega até 08/11
 - [ ] EP3 entrega até 06/12
 
