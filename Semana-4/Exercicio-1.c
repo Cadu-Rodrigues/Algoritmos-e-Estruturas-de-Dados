@@ -87,6 +87,7 @@ bool inserirElemListaOrd(LISTA *l, int ch)
     if (i->prox != NULL)
         i->prox->ant = i;
     i->ant = ant;
+    return true;
 }
 bool excluirElemListaOrd(LISTA *l, int ch)
 {
