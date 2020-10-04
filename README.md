@@ -15,7 +15,7 @@
 - [x] Semana 1 - 17/08 a 22/08
 - [x] Semana 2 - 24/08 a 29/08
 - [x] Semana 3 - 31/08 a 05/09
-- [ ] Semana 4 - 07/09 a 12/09
+- [x] Semana 4 - 07/09 a 12/09
 - [ ] Semana 5 - 14/09 a 19/09
 - [ ] Semana 6 - 21/09 a 26/09
 - [ ] Semana 7 - 28/09 a 03/10
