@@ -1,0 +1,21 @@
+Exercicio 1
+bool encontrarMinMax(DEQUE *d, int *min, int *max)
+{
+    bool resposta = false;
+    if (d->cabeca->ant != d->cabeca && d->cabeca->prox != d->cabeca)
+    {
+        *min = d->cabeca->prox->chave;
+        *max = d->cabeca->prox->chave;
+        ELEMENTO *elem = d->cabeca->prox;
+        while (elem != d->cabeca)
+        {
+            if (elem->chave > *max)
+                *max = elem->chave;
+            if (elem->chave < *min)
+                *min = elem->chave;
+            elem = elem->prox;
+        }
+        resposta = true;
+    }
+    return resposta;
+}
