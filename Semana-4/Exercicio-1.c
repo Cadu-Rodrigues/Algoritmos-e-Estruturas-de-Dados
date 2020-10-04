@@ -76,20 +76,17 @@ bool inserirElemListaOrd(LISTA *l, int ch)
     i->reg.chave = ch;
     if (ant == NULL)
     {
-        i->ant = NULL;
         i->prox = l->inicio;
         l->inicio = i;
     }
     else
     {
-        i->ant = ant;
         i->prox = ant->prox;
         ant->prox = i;
     }
     if (i->prox != NULL)
-    {
         i->prox->ant = i;
-    }
+    i->ant = ant;
 }
 bool excluirElemListaOrd(LISTA *l, int ch)
 {
