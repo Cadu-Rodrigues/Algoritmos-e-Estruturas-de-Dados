@@ -55,16 +55,18 @@ bool exibirLog(PFILA f)
 }
 bool idEhValido(PFILA f, int id)
 {
-  if ((id < 0) || (id > f->maxElementos))
-    return false;
+  return !((id < 0) || (id > f->maxElementos));
+}
+bool idExisteNaFila(PFILA f, int id)
+{
   PONT iterador = f->fila->prox;
   while (iterador != f->fila)
   {
     if (iterador->id == id)
-      return false;
+      return true;
     iterador = iterador->prox;
   }
-  return true;
+  return false;
 }
 PONT elementoAnterior(PFILA f, int id, float prioridade)
 {
@@ -76,10 +78,15 @@ PONT elementoAnterior(PFILA f, int id, float prioridade)
       ant = iterador;
     iterador = iterador->prox;
   }
-  printf("Ant:%p", ant);
   return ant;
 }
-
+PONT retornaElemento(PFILA f, int id)
+{
+  if (idEhValido(f, id) && idExisteNaFila(f, id))
+    return f->arranjo[id];
+  else
+    return NULL;
+}
 int tamanho(PFILA f)
 {
 
@@ -96,7 +103,7 @@ int tamanho(PFILA f)
 bool inserirElemento(PFILA f, int id, float prioridade)
 {
 
-  if (!idEhValido(f, id))
+  if (!idEhValido(f, id) || idExisteNaFila(f, id))
     return false;
   PONT ant = elementoAnterior(f, id, prioridade);
   PONT elem = (ELEMENTO *)malloc(sizeof(ELEMENTO));
@@ -109,6 +116,7 @@ bool inserirElemento(PFILA f, int id, float prioridade)
   f->arranjo[id] = elem;
   return true;
 }
+
 bool aumentarPrioridade(PFILA f, int id, float novaPrioridade)
 {
   bool resposta = false;
