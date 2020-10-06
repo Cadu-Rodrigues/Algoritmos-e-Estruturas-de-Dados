@@ -170,9 +170,9 @@ PONT removerElemento(PFILA f)
 
 bool consultarPrioridade(PFILA f, int id, float *resposta)
 {
-  bool resp = false;
-
-  /* COMPLETAR */
-
-  return resp;
+  if (!idEhValido(f, id) || !idExisteNaFila(f, id))
+    return false;
+  PONT elem = retornaElemento(f, id);
+  *resposta = elem->prioridade;
+  return true;
 }
