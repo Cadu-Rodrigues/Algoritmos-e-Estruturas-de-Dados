@@ -162,6 +162,13 @@ int main()
   else
     printf("Funcao retornou false (20) - esperado, elemento com id=4 nao existe\n");
   exibirLog(f);
-
+  float resposta;
+  if (consultarPrioridade(f, 0, &resposta))
+  {
+    printf("(21) Funcao retornou true\n");
+    printf("%f\n", resposta);
+  }
+  else
+    printf("Funcao retornou false (21)\n");
   return 0;
 }
