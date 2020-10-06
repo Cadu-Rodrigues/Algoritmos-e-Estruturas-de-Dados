@@ -87,6 +87,15 @@ PONT retornaElemento(PFILA f, int id)
   else
     return NULL;
 }
+void reposicionaElemento(PONT ant, PONT elem)
+{
+  elem->prox->ant = elem->ant;
+  elem->ant->prox = elem->prox;
+  elem->prox = ant->prox;
+  elem->ant = ant;
+  ant->prox = elem;
+  elem->prox->ant = elem;
+}
 int tamanho(PFILA f)
 {
 
@@ -116,7 +125,6 @@ bool inserirElemento(PFILA f, int id, float prioridade)
   f->arranjo[id] = elem;
   return true;
 }
-
 bool aumentarPrioridade(PFILA f, int id, float novaPrioridade)
 {
   if (!idEhValido(f, id) || !idExisteNaFila(f, id))
@@ -126,12 +134,8 @@ bool aumentarPrioridade(PFILA f, int id, float novaPrioridade)
     return false;
   elem->prioridade = novaPrioridade;
   PONT ant = elementoAnterior(f, id, novaPrioridade);
-  elem->prox->ant = elem->ant;
-  elem->ant->prox = elem->prox;
-  elem->prox = ant->prox;
-  elem->ant = ant;
-  ant->prox = elem;
-  elem->prox->ant = elem;
+  if (ant != elem->ant)
+    reposicionaElemento(ant, elem);
   return true;
 }
 
@@ -144,12 +148,8 @@ bool reduzirPrioridade(PFILA f, int id, float novaPrioridade)
     return false;
   elem->prioridade = novaPrioridade;
   PONT ant = elementoAnterior(f, id, novaPrioridade);
-  elem->prox->ant = elem->ant;
-  elem->ant->prox = elem->prox;
-  elem->prox = ant->prox;
-  elem->ant = ant;
-  ant->prox = elem;
-  elem->prox->ant = elem;
+  if (ant != elem->ant)
+    reposicionaElemento(ant, elem);
   return true;
 }
 
