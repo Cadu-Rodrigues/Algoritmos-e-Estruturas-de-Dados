@@ -69,11 +69,27 @@ int tamanho(PFILA f)
 
 bool inserirElemento(PFILA f, int id, float prioridade)
 {
-  bool resposta = false;
-
-  /* COMPLETAR */
-
-  return resposta;
+  ELEMENTO *ant = f->fila;
+  ELEMENTO *iterador = f->fila->prox;
+  ELEMENTO *elem = (ELEMENTO *)malloc(sizeof(ELEMENTO));
+  if (id < 0 || id > f->maxElementos)
+    return false;
+  while (iterador != f->fila)
+  {
+    if (iterador->id == id)
+      return false;
+    if (iterador->prioridade > prioridade)
+      ant = iterador;
+    iterador = iterador->prox;
+  }
+  elem->id = id;
+  elem->prioridade = prioridade;
+  elem->prox = ant->prox;
+  elem->ant = ant;
+  ant->prox = elem;
+  elem->prox->ant = elem;
+  f->arranjo[id] = elem;
+  return true;
 }
 
 bool aumentarPrioridade(PFILA f, int id, float novaPrioridade)
