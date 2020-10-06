@@ -34,7 +34,7 @@ int main()
   else
     printf("Funcao retornou false esperado, pois o id já existe (6)\n");
   exibirLog(f);
-  if (inserirElemento(f, 5, 5))
+  if (inserirElemento(f, 12, 12))
     printf("(7) Funcao retornou true\n");
   else
     printf("Funcao retornou false esperado, pois o id é maior que o permitido (7)\n");
