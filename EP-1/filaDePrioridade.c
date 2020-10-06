@@ -96,6 +96,10 @@ void reposicionaElemento(PONT ant, PONT elem)
   ant->prox = elem;
   elem->prox->ant = elem;
 }
+bool filaVazia(PFILA f)
+{
+  return (f->fila->prox == f->fila && f->fila->ant == f->fila);
+}
 int tamanho(PFILA f)
 {
 
@@ -155,11 +159,13 @@ bool reduzirPrioridade(PFILA f, int id, float novaPrioridade)
 
 PONT removerElemento(PFILA f)
 {
-  PONT resposta = NULL;
-
-  /* COMPLETAR */
-
-  return resposta;
+  if (filaVazia(f))
+    return NULL;
+  PONT elemExcluido = f->fila->prox;
+  elemExcluido->prox->ant = elemExcluido->ant;
+  elemExcluido->ant->prox = elemExcluido->prox;
+  f->arranjo[elemExcluido->id] = NULL;
+  return elemExcluido;
 }
 
 bool consultarPrioridade(PFILA f, int id, float *resposta)
