@@ -119,11 +119,20 @@ bool inserirElemento(PFILA f, int id, float prioridade)
 
 bool aumentarPrioridade(PFILA f, int id, float novaPrioridade)
 {
-  bool resposta = false;
-
-  /* COMPLETAR */
-
-  return resposta;
+  if (!idEhValido(f, id) || !idExisteNaFila(f, id))
+    return false;
+  PONT elem = retornaElemento(f, id);
+  if (elem->prioridade >= novaPrioridade)
+    return false;
+  elem->prioridade = novaPrioridade;
+  PONT ant = elementoAnterior(f, id, novaPrioridade);
+  elem->prox->ant = elem->ant;
+  elem->ant->prox = elem->prox;
+  elem->prox = ant->prox;
+  elem->ant = ant;
+  ant->prox = elem;
+  elem->prox->ant = elem;
+  return true;
 }
 
 bool reduzirPrioridade(PFILA f, int id, float novaPrioridade)
