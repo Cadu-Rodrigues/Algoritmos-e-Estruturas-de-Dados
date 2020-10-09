@@ -1,0 +1,25 @@
+Exercicio 1
+bool inserirNaFila(FILA *f, REGISTRO reg)
+{
+    ELEMENTO *elem = (ELEMENTO *)malloc(sizeof(ELEMENTO));
+    elem->prox = NULL;
+    elem->reg = reg;
+    if (f->cabeca->prox == NULL)
+        f->cabeca->prox = elem;
+    else
+        f->fim->prox = elem;
+    f->fim = elem;
+    return true;
+}
+bool excluirDaFila(FILA *f, REGISTRO *reg)
+{
+    if (f->cabeca->prox == NULL)
+        return false;
+    ELEMENTO *exclui = f->cabeca->prox;
+    *reg = exclui->reg;
+    f->cabeca->prox = exclui->prox;
+    free(exclui);
+    if (f->cabeca->prox == NULL)
+        f->fim = NULL;
+    return true;
+}

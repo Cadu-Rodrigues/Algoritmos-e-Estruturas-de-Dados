@@ -18,7 +18,7 @@
 - [x] Semana 4 - 07/09 a 12/09
 - [x] Semana 5 - 14/09 a 19/09
 - [x] Semana 6 - 21/09 a 26/09
-- [ ] Semana 7 - 28/09 a 03/10
+- [x] Semana 7 - 28/09 a 03/10
 - [ ] Semana 8 - 05/10 a 10/10
 - [ ] Semana 9 - 12/10 a 17/10
 - [ ] Semana 10 - 19/10 a 24/10
