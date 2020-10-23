@@ -1,0 +1,19 @@
+MATRIZ *multiplicarMatrizes(MATRIZ *m1, MATRIZ *m2)
+{
+    if (m1->colunas != m2->linhas)
+        return NULL;
+    MATRIZ *res = inicializarMatriz(m1->linhas, m2->colunas);
+    int i, j, k;
+    int valor; /* COMPLETAR */
+    for (i = 0; i < m1->linhas; i++)
+    {
+        for (j = 0; j < m2->colunas; j++)
+        {
+            valor = 0;
+            for (k = 0; k < m1->linhas; k++)
+                valor += m1->m[i][k] * m2->m[k][j];
+            res->m[i][j] = valor;
+        }
+    }
+    return res;
+}
