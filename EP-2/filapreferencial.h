@@ -5,15 +5,17 @@
 
 typedef int bool;
 
-typedef struct aux {
+typedef struct aux
+{
   int id;
   bool ehPreferencial;
-  struct aux* prox;
-} ELEMENTO, * PONT;
+  struct aux *prox;
+} ELEMENTO, *PONT;
 
-typedef struct {
+typedef struct
+{
   PONT inicioPref;
   PONT fimPref;
   PONT inicioGeral;
   PONT fimGeral;
-} FILAPREFERENCIAL, * PFILA;
+} FILAPREFERENCIAL, *PFILA;
