@@ -120,14 +120,34 @@ bool inserirPessoaNaFila(PFILA f, int id, int ehPreferencial)
   }
   return true;
 }
-
+void removerElemento(PFILA f, bool ehPreferencial)
+{
+  if (ehPreferencial)
+  {
+    f->inicioPref = f->inicioPref->prox;
+    if (f->inicioPref == f->fimPref)
+    {
+      f->inicioPref = NULL;
+      f->fimPref = NULL;
+    }
+  }
+  else
+  {
+    f->inicioGeral = f->inicioGeral->prox;
+    if (f->inicioGeral == f->fimGeral)
+    {
+      f->inicioGeral = NULL;
+      f->fimGeral = NULL;
+    }
+  }
+}
 bool atenderPrimeiraDaFilaPreferencial(PFILA f, int *id)
 {
-  bool resposta = false;
-
-  /* COMPLETAR */
-
-  return resposta;
+  if (tamanho(f) == 0 || tamanhoFilaPreferencial(f) == 0)
+    return false;
+  *id = f->inicioPref->id;
+  removerElemento(f, true);
+  return true;
 }
 
 bool atenderPrimeiraDaFilaGeral(PFILA f, int *id)
