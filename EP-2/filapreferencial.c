@@ -78,12 +78,47 @@ void exibirLog(PFILA f)
   }
   printf("\n\n");
 }
-
+PONT alocaPonteiro(int id, int ehPreferencial)
+{
+  PONT novo = (PONT)malloc(sizeof(ELEMENTO));
+  novo->ehPreferencial = ehPreferencial;
+  novo->id = id;
+  novo->prox = NULL;
+  return novo;
+}
 bool inserirPessoaNaFila(PFILA f, int id, int ehPreferencial)
 {
   bool resposta = false;
   /* COMPLETAR */
-  return resposta;
+  if (id < 0 || (buscarID(f, id) != NULL))
+    return false;
+
+  PONT novo = alocaPonteiro(id, ehPreferencial);
+  if (tamanho(f) == 0)
+  {
+    f->inicioGeral = novo;
+    f->fimGeral = novo;
+  }
+  else
+  {
+    f->fimGeral->prox = novo;
+    f->fimGeral = novo;
+  }
+  if (ehPreferencial)
+  {
+    PONT novoPreferencial = alocaPonteiro(id, ehPreferencial);
+    if (f->inicioPref == NULL)
+    {
+      f->inicioPref = novoPreferencial;
+      f->fimPref = novoPreferencial;
+    }
+    else
+    {
+      f->fimPref->prox = novoPreferencial;
+      f->fimPref = novoPreferencial;
+    }
+  }
+  return true;
 }
 
 bool atenderPrimeiraDaFilaPreferencial(PFILA f, int *id)
