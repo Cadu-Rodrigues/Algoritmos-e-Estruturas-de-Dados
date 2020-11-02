@@ -122,24 +122,18 @@ bool inserirPessoaNaFila(PFILA f, int id, int ehPreferencial)
 }
 void removerElemento(PFILA f, bool ehPreferencial)
 {
+  PONT excluido;
   if (ehPreferencial)
   {
+    excluido = f->inicioPref;
     f->inicioPref = f->inicioPref->prox;
-    if (f->inicioPref == f->fimPref)
-    {
-      f->inicioPref = NULL;
-      f->fimPref = NULL;
-    }
   }
   else
   {
+    excluido = f->inicioGeral;
     f->inicioGeral = f->inicioGeral->prox;
-    if (f->inicioGeral == f->fimGeral)
-    {
-      f->inicioGeral = NULL;
-      f->fimGeral = NULL;
-    }
   }
+  free(excluido);
 }
 bool atenderPrimeiraDaFilaPreferencial(PFILA f, int *id)
 {
