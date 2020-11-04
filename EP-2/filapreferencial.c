@@ -120,19 +120,32 @@ bool inserirPessoaNaFila(PFILA f, int id, int ehPreferencial)
   }
   return true;
 }
+void removerElementoPorIDFilaPreferencial(PFILA f, int id)
+{
+  PONT temp = f->inicioPref;
+  while (temp->prox->id != id && temp != NULL)
+  {
+    temp = temp->prox;
+  }
+  if (temp == NULL)
+    return;
+  PONT excluido = temp->prox;
+  temp->prox = excluido->prox;
+  free(excluido);
+}
 void removerElementoPorIDFilaGeral(PFILA f, int id)
 {
   PONT temp = f->inicioGeral;
   PONT excluido = buscarID(f, id);
   if (temp == excluido)
-{
-    if (temp == f->fimGeral)
   {
+    if (temp == f->fimGeral)
+    {
       f->inicioGeral = NULL;
       f->fimGeral = NULL;
-  }
-  else
-  {
+    }
+    else
+    {
       f->inicioGeral = f->inicioGeral->prox;
     }
     free(excluido);
@@ -145,16 +158,23 @@ void removerElementoPorIDFilaGeral(PFILA f, int id)
   temp->prox = excluido->prox;
   free(excluido);
 }
+void removerPrimeiroElementoFilaGeral(PFILA f)
+{
+  if (f->inicioGeral)
+  {
+    PONT excluido = f->inicioGeral;
     f->inicioGeral = f->inicioGeral->prox;
+    free(excluido);
   }
+}
 void removerPrimeiroElementoFilaPreferencial(PFILA f)
 {
   if (f->inicioPref)
   {
     PONT excluido = f->inicioPref;
     f->inicioPref = f->inicioPref->prox;
-  free(excluido);
-}
+    free(excluido);
+  }
 }
 bool atenderPrimeiraDaFilaPreferencial(PFILA f, int *id)
 {
@@ -163,7 +183,7 @@ bool atenderPrimeiraDaFilaPreferencial(PFILA f, int *id)
   if (tamanhoFilaPreferencial(f) == 0 && tamanho(f) != 0)
     *id = f->inicioGeral->id;
   else
-  *id = f->inicioPref->id;
+    *id = f->inicioPref->id;
   removerPrimeiroElementoFilaPreferencial(f);
   removerElementoPorIDFilaGeral(f, *id);
   return true;
@@ -171,11 +191,15 @@ bool atenderPrimeiraDaFilaPreferencial(PFILA f, int *id)
 
 bool atenderPrimeiraDaFilaGeral(PFILA f, int *id)
 {
-  bool resposta = false;
-
-  /* COMPLETAR */
-
-  return resposta;
+  if (tamanho(f) == 0)
+    return false;
+  *id = f->inicioGeral->id;
+  if (f->inicioGeral->ehPreferencial)
+  {
+    removerElementoPorIDFilaPreferencial(f, *id);
+  }
+  removerPrimeiroElementoFilaGeral(f);
+  return true;
 }
 
 bool desistirDaFila(PFILA f, int id)
