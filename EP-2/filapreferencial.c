@@ -120,27 +120,52 @@ bool inserirPessoaNaFila(PFILA f, int id, int ehPreferencial)
   }
   return true;
 }
-void removerElemento(PFILA f, bool ehPreferencial)
+void removerElementoPorIDFilaGeral(PFILA f, int id)
 {
-  PONT excluido;
-  if (ehPreferencial)
+  PONT temp = f->inicioGeral;
+  PONT excluido = buscarID(f, id);
+  if (temp == excluido)
+{
+    if (temp == f->fimGeral)
   {
-    excluido = f->inicioPref;
-    f->inicioPref = f->inicioPref->prox;
+      f->inicioGeral = NULL;
+      f->fimGeral = NULL;
   }
   else
   {
-    excluido = f->inicioGeral;
+      f->inicioGeral = f->inicioGeral->prox;
+    }
+    free(excluido);
+    return;
+  }
+  while (temp->prox != excluido)
+  {
+    temp = temp->prox;
+  }
+  temp->prox = excluido->prox;
+  free(excluido);
+}
     f->inicioGeral = f->inicioGeral->prox;
   }
+void removerPrimeiroElementoFilaPreferencial(PFILA f)
+{
+  if (f->inicioPref)
+  {
+    PONT excluido = f->inicioPref;
+    f->inicioPref = f->inicioPref->prox;
   free(excluido);
+}
 }
 bool atenderPrimeiraDaFilaPreferencial(PFILA f, int *id)
 {
   if (tamanho(f) == 0 || tamanhoFilaPreferencial(f) == 0)
     return false;
+  if (tamanhoFilaPreferencial(f) == 0 && tamanho(f) != 0)
+    *id = f->inicioGeral->id;
+  else
   *id = f->inicioPref->id;
-  removerElemento(f, true);
+  removerPrimeiroElementoFilaPreferencial(f);
+  removerElementoPorIDFilaGeral(f, *id);
   return true;
 }
 
