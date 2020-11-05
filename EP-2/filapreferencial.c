@@ -78,60 +78,30 @@ void exibirLog(PFILA f)
   }
   printf("\n\n");
 }
-PONT alocaPonteiro(int id, int ehPreferencial)
-{
-  PONT novo = (PONT)malloc(sizeof(ELEMENTO));
-  novo->ehPreferencial = ehPreferencial;
-  novo->id = id;
-  novo->prox = NULL;
-  return novo;
-}
-bool inserirPessoaNaFila(PFILA f, int id, int ehPreferencial)
-{
-  bool resposta = false;
-  /* COMPLETAR */
-  if (id < 0 || (buscarID(f, id) != NULL))
-    return false;
-
-  PONT novo = alocaPonteiro(id, ehPreferencial);
-  if (tamanho(f) == 0)
-  {
-    f->inicioGeral = novo;
-    f->fimGeral = novo;
-  }
-  else
-  {
-    f->fimGeral->prox = novo;
-    f->fimGeral = novo;
-  }
-  if (ehPreferencial)
-  {
-    PONT novoPreferencial = alocaPonteiro(id, ehPreferencial);
-    if (f->inicioPref == NULL)
-    {
-      f->inicioPref = novoPreferencial;
-      f->fimPref = novoPreferencial;
-    }
-    else
-    {
-      f->fimPref->prox = novoPreferencial;
-      f->fimPref = novoPreferencial;
-    }
-  }
-  return true;
-}
 void removerElementoPorIDFilaPreferencial(PFILA f, int id)
 {
   PONT temp = f->inicioPref;
-  while (temp->prox->id != id && temp != NULL)
+  PONT geral = buscarID(f, id);
+  if (temp->id == geral->id)
+  {
+    if (temp == f->fimPref)
+    {
+      f->inicioPref = NULL;
+      f->fimPref = NULL;
+    }
+    else
+    {
+      f->inicioPref = f->inicioPref->prox;
+    }
+    free(temp);
+    return;
+  }
+  while (temp->id != geral->id)
   {
     temp = temp->prox;
   }
-  if (temp == NULL)
-    return;
-  PONT excluido = temp->prox;
-  temp->prox = excluido->prox;
-  free(excluido);
+  temp->prox = geral->prox;
+  free(temp);
 }
 void removerElementoPorIDFilaGeral(PFILA f, int id)
 {
@@ -176,6 +146,48 @@ void removerPrimeiroElementoFilaPreferencial(PFILA f)
     free(excluido);
   }
 }
+PONT alocaPonteiro(int id, int ehPreferencial)
+{
+  PONT novo = (PONT)malloc(sizeof(ELEMENTO));
+  novo->ehPreferencial = ehPreferencial;
+  novo->id = id;
+  novo->prox = NULL;
+  return novo;
+}
+bool inserirPessoaNaFila(PFILA f, int id, int ehPreferencial)
+{
+  bool resposta = false;
+  /* COMPLETAR */
+  if (id < 0 || (buscarID(f, id) != NULL))
+    return false;
+
+  PONT novo = alocaPonteiro(id, ehPreferencial);
+  if (tamanho(f) == 0)
+  {
+    f->inicioGeral = novo;
+    f->fimGeral = novo;
+  }
+  else
+  {
+    f->fimGeral->prox = novo;
+    f->fimGeral = novo;
+  }
+  if (ehPreferencial)
+  {
+    PONT novoPreferencial = alocaPonteiro(id, ehPreferencial);
+    if (f->inicioPref == NULL)
+    {
+      f->inicioPref = novoPreferencial;
+      f->fimPref = novoPreferencial;
+    }
+    else
+    {
+      f->fimPref->prox = novoPreferencial;
+      f->fimPref = novoPreferencial;
+    }
+  }
+  return true;
+}
 bool atenderPrimeiraDaFilaPreferencial(PFILA f, int *id)
 {
   if (tamanho(f) == 0 || tamanhoFilaPreferencial(f) == 0)
@@ -204,9 +216,11 @@ bool atenderPrimeiraDaFilaGeral(PFILA f, int *id)
 
 bool desistirDaFila(PFILA f, int id)
 {
-  bool resposta = false;
-
-  /* COMPLETAR */
-
-  return resposta;
+  PONT pessoa = buscarID(f, id);
+  if (!pessoa)
+    return false;
+  if (pessoa->ehPreferencial)
+    removerElementoPorIDFilaPreferencial(f, id);
+  removerElementoPorIDFilaGeral(f, id);
+  return true;
 }
