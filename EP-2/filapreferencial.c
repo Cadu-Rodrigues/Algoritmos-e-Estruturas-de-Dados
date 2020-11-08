@@ -134,6 +134,8 @@ void removerPrimeiroElementoFilaGeral(PFILA f)
   {
     PONT excluido = f->inicioGeral;
     f->inicioGeral = f->inicioGeral->prox;
+    if (f->inicioGeral == NULL)
+      f->fimGeral = NULL;
     free(excluido);
   }
 }
@@ -143,6 +145,8 @@ void removerPrimeiroElementoFilaPreferencial(PFILA f)
   {
     PONT excluido = f->inicioPref;
     f->inicioPref = f->inicioPref->prox;
+    if (f->inicioPref == NULL)
+      f->fimPref = NULL;
     free(excluido);
   }
 }
