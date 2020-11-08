@@ -44,6 +44,18 @@ int tamanhoFilaPreferencial(PFILA f)
   }
   return tam;
 }
+bool filaPreferencialVazia(PFILA f)
+{
+  if (!f->inicioPref && !f->fimPref)
+    return true;
+  return false;
+}
+bool filaGeralVazia(PFILA f)
+{
+  if (!f->inicioGeral && !f->fimGeral)
+    return true;
+  return false;
+}
 
 PONT buscarID(PFILA f, int id)
 {
@@ -166,7 +178,7 @@ bool inserirPessoaNaFila(PFILA f, int id, int ehPreferencial)
     return false;
 
   PONT novo = alocaPonteiro(id, ehPreferencial);
-  if (tamanho(f) == 0)
+  if (filaGeralVazia(f))
   {
     f->inicioGeral = novo;
     f->fimGeral = novo;
@@ -194,9 +206,9 @@ bool inserirPessoaNaFila(PFILA f, int id, int ehPreferencial)
 }
 bool atenderPrimeiraDaFilaPreferencial(PFILA f, int *id)
 {
-  if (tamanho(f) == 0 || tamanhoFilaPreferencial(f) == 0)
+  if (filaGeralVazia(f) || filaPreferencialVazia(f))
     return false;
-  if (tamanhoFilaPreferencial(f) == 0 && tamanho(f) != 0)
+  if (filaPreferencialVazia(f) && !filaGeralVazia(f))
     *id = f->inicioGeral->id;
   else
     *id = f->inicioPref->id;
@@ -207,7 +219,7 @@ bool atenderPrimeiraDaFilaPreferencial(PFILA f, int *id)
 
 bool atenderPrimeiraDaFilaGeral(PFILA f, int *id)
 {
-  if (tamanho(f) == 0)
+  if (filaGeralVazia(f))
     return false;
   *id = f->inicioGeral->id;
   if (f->inicioGeral->ehPreferencial)
