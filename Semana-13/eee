@@ -1,0 +1,11 @@
+void encontrarMinMaxRec(PONT raiz, char *min, char *max)
+{
+   if (!raiz)
+      return;
+   if ((int)raiz->chave < (int)*min)
+      *min = raiz->chave;
+   if ((int)raiz->chave > (int)*max)
+      *max = raiz->chave;
+   encontrarMinMaxRec(raiz->ultimoFilho, min, max);
+   encontrarMinMaxRec(raiz->proximoIrmao, min, max);
+}
