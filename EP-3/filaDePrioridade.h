@@ -5,18 +5,20 @@
 
 typedef int bool;
 
-typedef struct {
+typedef struct
+{
   int id;
   float prioridade;
   int posicao;
-} ELEMENTO, * PONT;
+} ELEMENTO, *PONT;
 
-typedef struct {
+typedef struct
+{
   int maxElementos;
   int elementosNoHeap;
-  PONT* heap;
-  PONT* arranjo;
-} FILADEPRIORIDADE, * PFILA;
+  PONT *heap;
+  PONT *arranjo;
+} FILADEPRIORIDADE, *PFILA;
 
 PFILA criarFila(int max);
 
@@ -30,7 +32,7 @@ bool reduzirPrioridade(PFILA f, int id, float novaPrioridade);
 
 PONT removerElemento(PFILA f);
 
-bool consultarPrioridade(PFILA f, int id, float* resposta);
+bool consultarPrioridade(PFILA f, int id, float *resposta);
 
 /* As seguintes funcoes nao precisam ser implementadas, mas podem ser 
    utilizadas como funcoes recursivas auxiliares para a insercao,
