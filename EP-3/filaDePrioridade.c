@@ -63,17 +63,18 @@ void ajeitaHeap(PFILA A, int m, int i)
     esq = 2 * i;
     dir = (2 * i) + 1;
   }
-
-  int maior;
-  if (A->heap[esq] && esq < m && A->heap[esq]->prioridade > A->heap[i]->prioridade)
+void ajeitaHeap(PFILA A, int m, int i)
+{
+  int esq = 2 * i + 1;
+  int dir = 2 * 1 + 2;
+  int maior = i;
+  if (A->heap[esq] && esq < m && A->heap[esq]->prioridade > A->heap[maior]->prioridade)
     maior = esq;
-  else
-    maior = i;
   if (A->heap[dir] && dir < m && A->heap[dir]->prioridade > A->heap[maior]->prioridade)
     maior = dir;
   if (maior != i)
   {
-    ELEMENTO *temp = (PONT)malloc(sizeof(ELEMENTO));
+    PONT temp = (PONT)malloc(sizeof(ELEMENTO));
     int posI = A->heap[i]->posicao;
     int posM = A->heap[maior]->posicao;
     temp = A->heap[i];
@@ -95,6 +96,7 @@ int tamanho(PFILA f)
 
 bool inserirElemento(PFILA f, int id, float prioridade)
 {
+  int i;
   if (id < 0 || id >= f->maxElementos)
     return false;
   if (elementoInseridoEm(*f, id))
@@ -106,7 +108,10 @@ bool inserirElemento(PFILA f, int id, float prioridade)
   novo->posicao = f->elementosNoHeap - 1;
   f->arranjo[id] = &*novo;
   f->heap[f->elementosNoHeap - 1] = &*novo;
-  ajeitaHeap(f, f->elementosNoHeap, 0);
+  for (i = f->elementosNoHeap / 2 - 1; i >= 0; i--)
+  {
+    ajeitaHeap(f, f->elementosNoHeap, i);
+  }
   return true;
 }
 
