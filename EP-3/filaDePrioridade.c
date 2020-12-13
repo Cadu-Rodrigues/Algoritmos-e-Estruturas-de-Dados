@@ -49,20 +49,16 @@ bool elementoInseridoEm(FILADEPRIORIDADE fila, int id)
   }
   return false;
 }
-void ajeitaHeap(PFILA A, int m, int i)
+PONT elementoPorId(PFILA fila, int id)
 {
-  int esq;
-  int dir;
-  if (i == 0)
+  int i;
+  for (i = 0; i < fila->elementosNoHeap; i++)
   {
-    esq = 1;
-    dir = 2;
+    if (id == fila->heap[i]->id)
+      return fila->heap[i];
   }
-  else
-  {
-    esq = 2 * i;
-    dir = (2 * i) + 1;
-  }
+  return NULL;
+}
 void ajeitaHeap(PFILA A, int m, int i)
 {
   int esq = 2 * i + 1;
@@ -117,11 +113,20 @@ bool inserirElemento(PFILA f, int id, float prioridade)
 
 bool aumentarPrioridade(PFILA f, int id, float novaPrioridade)
 {
-  bool res = false;
-
-  /* COMPLETAR */
-
-  return res;
+  int i;
+  if (id < 0 || id >= f->maxElementos)
+    return false;
+  if (!elementoInseridoEm(*f, id))
+    return false;
+  PONT elemento = elementoPorId(f, id);
+  if (elemento->prioridade >= novaPrioridade)
+    return false;
+  elemento->prioridade = novaPrioridade;
+  for (i = f->elementosNoHeap / 2 - 1; i >= 0; i--)
+  {
+    ajeitaHeap(f, f->elementosNoHeap, i);
+  }
+  return true;
 }
 
 bool reduzirPrioridade(PFILA f, int id, float novaPrioridade)
