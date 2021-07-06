@@ -59,6 +59,17 @@ PONT elementoPorId(PFILA fila, int id)
   }
   return NULL;
 }
+void swap(PFILA A, int pos1, int pos2)
+{
+  PONT temp = (PONT)malloc(sizeof(ELEMENTO));
+  int posI = A->heap[pos1]->posicao;
+  int posM = A->heap[pos2]->posicao;
+  temp = A->heap[pos1];
+  A->heap[pos1] = A->heap[pos2];
+  A->heap[pos2] = temp;
+  A->heap[pos1]->posicao = posI;
+  A->heap[pos2]->posicao = posM;
+}
 void ajeitaHeap(PFILA A, int m, int i)
 {
   int esq = 2 * i + 1;
@@ -70,23 +81,18 @@ void ajeitaHeap(PFILA A, int m, int i)
     maior = dir;
   if (maior != i)
   {
-    PONT temp = (PONT)malloc(sizeof(ELEMENTO));
-    int posI = A->heap[i]->posicao;
-    int posM = A->heap[maior]->posicao;
-    temp = A->heap[i];
-    A->heap[i] = A->heap[maior];
-    A->heap[maior] = temp;
-    A->heap[i]->posicao = posI;
-    A->heap[maior]->posicao = posM;
+    swap(A, i, maior);
     ajeitaHeap(A, m, maior);
   }
 }
 int tamanho(PFILA f)
 {
   int tam = 0;
-
-  /* COMPLETAR */
-
+  int i;
+  for (i = 0; i < f->elementosNoHeap; i++)
+  {
+    tam++;
+  }
   return tam;
 }
 
@@ -131,27 +137,52 @@ bool aumentarPrioridade(PFILA f, int id, float novaPrioridade)
 
 bool reduzirPrioridade(PFILA f, int id, float novaPrioridade)
 {
-  bool res = false;
-
-  /* COMPLETAR */
-
-  return res;
+  int i;
+  if (id < 0 || id >= f->maxElementos)
+    return false;
+  if (!elementoInseridoEm(*f, id))
+    return false;
+  PONT elemento = elementoPorId(f, id);
+  if (elemento->prioridade <= novaPrioridade)
+    return false;
+  elemento->prioridade = novaPrioridade;
+  for (i = f->elementosNoHeap / 2 - 1; i >= 0; i--)
+  {
+    ajeitaHeap(f, f->elementosNoHeap, i);
+  }
+  return true;
 }
 
 PONT removerElemento(PFILA f)
 {
   PONT res = NULL;
-
-  /* COMPLETAR */
-
+  int i;
+  if (f->heap[0] == NULL)
+    return NULL;
+  int id = f->heap[0]->id;
+  int idUltimo = f->heap[f->elementosNoHeap - 1]->id;
+  PONT retirado = elementoPorId(f, id);
+  PONT ultimoElemento = elementoPorId(f, idUltimo);
+  f->arranjo[retirado->id] = ultimoElemento;
+  f->heap[0] = ultimoElemento;
+  f->arranjo[id] = NULL;
+  f->heap[f->elementosNoHeap - 1] = NULL;
+  f->elementosNoHeap--;
+  res = retirado;
+  for (i = f->elementosNoHeap / 2 - 1; i >= 0; i--)
+  {
+    ajeitaHeap(f, f->elementosNoHeap, i);
+  }
   return res;
 }
 
 bool consultarPrioridade(PFILA f, int id, float *resposta)
 {
-  bool res = false;
-
-  /* COMPLETAR */
-
-  return res;
+  if (id < 0 || id >= f->maxElementos)
+    return false;
+  if (!elementoInseridoEm(*f, id))
+    return false;
+  PONT elemento = elementoPorId(f, id);
+  *resposta = elemento->prioridade;
+  return true;
 }
